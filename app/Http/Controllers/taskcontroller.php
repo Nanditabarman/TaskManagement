@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Status;
+use App\Models\User;
 
 class Taskcontroller extends Controller
 {
@@ -15,23 +16,42 @@ class Taskcontroller extends Controller
 
 
     public function create(){
-        return view('Tasks.Create', );
+        $users = User::all(); // Retrieve all registered users
+        return view('tasks.create', compact('users'));
     }
 
     public function store(Request $request)
-{
+    {
+        // Define validation rules
+        $rules = [
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'deadline' => 'required|date|after_or_equal:today', // Ensure it's not after today
+            'status_id' => 'required',
+            'assinged_by' => 'required',
+            'assigned_to' => 'required',
+        ];
 
-    Task::create([
-        'title' => $request->title,
-        'description' => $request->description,
-        'deadline' => $request->deadline,
-        'status_id' => $request->status_id,
-        'assinged_by' => $request->assinged_by,
-        'assigned_to' => $request->assigned_to,
-    ]);
+        // Define custom validation messages
+        $messages = [
+            'deadline.after_or_equal' => 'The deadline must be today or a date after today.',
+        ];
 
-    return redirect()->route('tasks.create')->with('success', 'Task created successfully');
-}
+        // Validate the request data
+        $request->validate($rules, $messages);
+
+        // If validation passes, create the task
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'deadline' => $request->deadline,
+            'status_id' => $request->status_id,
+            'assinged_by' => $request->assinged_by,
+            'assigned_to' => $request->assigned_to,
+        ]);
+
+        return redirect()->route('tasks.create')->with('success', 'Task created successfully');
+    }
 
 
     public function edit($id){

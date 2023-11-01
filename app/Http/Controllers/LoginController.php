@@ -18,7 +18,9 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('welcome');
+            // return redirect()->route('welcome');
+            return redirect()->route('tasks.store');
+
         }
 
         return response()->json([

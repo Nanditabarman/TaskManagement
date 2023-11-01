@@ -42,7 +42,7 @@
             </div>
               <div class="btns">
                 <button id="submit" type="submit" class="btn bg-light ">Register</button>
-                <button id="button" type="button" class="btn bg-light "><a href="/login">Login</a></button>
+                <button id="button" type="button" class="btn bg-light" ><a class=" text-decoration-none" href="/login">Login</a></button>
               </div>
             </form>
           </div>

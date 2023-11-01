@@ -31,8 +31,9 @@
                <p class="text-danger">{{ $errors->first('password') }}</p>
               @endif
         </div>
-              <div class="d-grid">
-                <button type="submit" class="btn text-light bg-dark">Login</button>
+              <div class="btns">
+                <button id="button" type="button" class="btn bg-dark"><a class="text-decoration-none text-white" href="/">Register</a></button>
+                <button id="submit" type="submit" class="btn bg-dark text-white" >Login</button>
               </div>
             </form>
           </div>

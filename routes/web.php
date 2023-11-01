@@ -23,7 +23,8 @@ use App\Http\Controllers\Taskcontroller;
 
 Route::get('welcome',[Taskcontroller::class, 'index']);
 
-Route::view('/', 'Register');
+// Route::view('/', 'Register');
+Route::view('/', 'Register')->name("Register");
 Route::post('/add', [RegisterController::class, 'store']);
 
 Route::view('login', 'Login')->name("Login");
@@ -40,7 +41,8 @@ Route::get('tasks/create',[Taskcontroller::class, 'create'])->name('tasks.create
 Route::post('tasks/store', [Taskcontroller::class, 'store'])->name('tasks.store');
 
 // view page
-Route::get('/', [Taskcontroller::class, 'index'])->name('tasks.store');
+// Route::get('/', [Taskcontroller::class, 'index'])->name('tasks.store');
+Route::get('tasks', [Taskcontroller::class, 'index'])->name('tasks.store');
 
 
 // put api(update function)
